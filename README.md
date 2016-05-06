@@ -1,1 +1,3 @@
-# os_tf2_config
+# Team Fortress 2 Config Files
+
+My personal Team Fortress 2 configuration files
