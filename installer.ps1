@@ -24,6 +24,24 @@ Function Install-Config {
     Copy-Item -Verbose -Recurse -Path ".\cfg\auto" -Destination "$tfdir\cfg\"
     Copy-Item -Verbose -Path ".\cfg\autoexec.cfg" -Destination "$tfdir\cfg\"
 
+    # Install tr_walkway
+    Write-Host "Installing map: tr_walkway."
+
+    Copy-Item -Verbose -Path ".\tr_walkway_rc2\tr_walkway_rc2.bsp" -Destination "$tfdir\maps"
+    if ( -not (Test-Path -PathType Container "$tfdir\cfg\tr_walkway") ) {
+        New-Item  -Verbose -ItemType Directory -Path "$tfdir\cfg\tr_walkway"
+    }
+    Copy-Item -Verbose -Path ".\tr_walkway_rc2\botmaxconfig.cfg" -Destination "$tfdir\cfg\tr_walkawy"
+
+    # Install Hitsounds
+    Write-Host "Installing hitsounds."
+    if (Test-Path -PathType Container "$tfdir\custom\hitsounds\sound") {
+        Remove-Item -Verbose -Recurse -Path "$tfdir\custom\hitsounds"
+    }
+    New-Item  -Verbose -ItemType Directory -Path "$tfdir\custom\hitsounds\sound"
+    Copy-Item -Verbose -Recurse -Path ".\hitsound\ui" -Destination "$tfdir\custom\hitsounds\sound\"
+    Copy-Item -Verbose -Recurse -Path ".\hitsound\player" -Destination "$tfdir\custom\hitsounds\sound\"
+
     # Apply hudlayout.res changes
     $hlrFile = "$tfdir\custom\eve hud\scripts\hudlayout.res"
     if (Test-Path -PathType Leaf "$hlrFile") {
